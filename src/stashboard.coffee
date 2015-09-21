@@ -5,6 +5,9 @@
 #   HUBOT_STASHBOARD_TOKEN
 #   HUBOT_STASHBOARD_SECRET
 #   HUBOT_STASHBOARD_URL
+#   HUBOT_STASHBOARD_UP
+#   HUBOT_STASHBOARD_DOWN
+#   HUBOT_STASHBOARD_WARN
 #
 # Commands:
 #   hubot stashboard (status|?) - Display current stashboard status (via stupid hipchat icons)
@@ -23,9 +26,9 @@ request = require 'request'
 
 class Stashbot
   #hipchat icons, customize away
-  statusUp: '(successful)'
-  statusDown: '(failed)'
-  statusWarn: '(unknown)'
+  statusUp: process.env.HUBOT_STASHBOARD_UP || '(successful)'
+  statusDown: process.env.HUBOT_STASHBOARD_DOWN || '(failed)'
+  statusWarn: process.env.HUBOT_STASHBOARD_WARN || '(unknown)'
 
   constructor: (@robot, cb) ->
     if process.env.HUBOT_STASHBOARD_URL? and process.env.HUBOT_STASHBOARD_TOKEN? and process.env.HUBOT_STASHBOARD_SECRET?
